@@ -16,13 +16,14 @@ import random
 """
 
 #find way of telling Python which round it is
-round_count = 0
+round_count = 1
 
-allocation_choice = input('Round {round_count}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. ')
+allocation_choice = input('Round {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(round_count))
 
 import requests
-
-if allocation_choice == 'C':
+"""
+#correctly prints starship name for choice
+if allocation_choice == 'C' or 'c':
       random_card1 = random.randint(1, 36)
       url_1 = 'https://swapi.dev/api/starships/{}/'.format(random_card1)
       response1 = requests.get(url_1)
@@ -33,18 +34,29 @@ if allocation_choice == 'C':
       response2 = requests.get(url_2)
       starship2 = response2.json()
 
-      print(starship1['name'])
+      #can't get to work: presenting the two choices to user
+      #chosen_ship = input("You have a choice between Starship 1: '{}' or Starship 2: '{}'".format(starship1["name"], starship2["name"]))
 
+      #haven't yet tested calling dictionary 
+      if chosen_ship == 'Starship 1' or '1':
+            stored_choice = {url_1}
+      elif chosen_ship == 'Starship 2' or '2':
+            stored_choice = {url_2}
+      else:
+            chosen_ship = input("You have entered an invalid choice. Please type 'Starship 1' or 'Starship 2'.")
+            if chosen_ship == 'Starship 1' or '1':
+                  stored_choice = {url_1}
+            else chosen_ship == 'Starship 2' or '2':
+                  stored_choice = {url_2}
+
+#end of choice section 
       """
-      #find way of naming the chosen card ie giving the starship type not the number given to user
-      name_r1 = starships['name']
 
-      print('You have a choice between {random_card1} and {random_card2}. ')
-      chosen_card = input('Which card do you choose? ')
-      url = 'https://swapi.dev/api/starships/{}/'.format(chosen_card)
-
-else allocation_choice == R:
+#if user chooses to be randomly allocated a card
+else allocation_choice == 'R' or 'r':
       random_allocated_card = random.randint(1, 36)
-      url = 'https://swapi.dev/api/starships/{}/'.format(random_allocated_card)
+      url_rand = 'https://swapi.dev/api/starships/{}/'.format(random_allocated_card)
 
-"""
+#giving starship details
+
+
