@@ -16,12 +16,12 @@ import random
 """
 
 #find way of telling Python which round it is
-round_count = 1
+round_count = 0
 
 allocation_choice = input('Round {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(round_count))
 
 import requests
-"""
+
 #correctly prints starship name for choice
 if allocation_choice == 'C' or 'c':
       random_card1 = random.randint(1, 36)
@@ -44,19 +44,14 @@ if allocation_choice == 'C' or 'c':
             stored_choice = {url_2}
       else:
             chosen_ship = input("You have entered an invalid choice. Please type 'Starship 1' or 'Starship 2'.")
-            if chosen_ship == 'Starship 1' or '1':
-                  stored_choice = {url_1}
-            else chosen_ship == 'Starship 2' or '2':
-                  stored_choice = {url_2}
+            continue
 
-#end of choice section 
-      """
+#end of choice section
 
 #if user chooses to be randomly allocated a card
-else allocation_choice == 'R' or 'r':
+elif allocation_choice == 'R' or 'r':
       random_allocated_card = random.randint(1, 36)
       url_rand = 'https://swapi.dev/api/starships/{}/'.format(random_allocated_card)
-
-#giving starship details
-
-
+      rand_response = requests.get(url_rand)
+      rand_starship = rand_response.json()
+      print("You have been allocated the following Starship: '{}'".format(rand_starship["name"]))
