@@ -29,15 +29,15 @@ def random_starship1():
     response = requests.get(url)
     starship1 = response.json()
     return{
-        'name':starship1['name'],
-        'value':starship1['cost_in_credits'],
-        'length':starship1['length'],
-        'max atmosphering speed':starship1['max_atmosphering_speed'],
-        'max sublight speed (MGLT)':starship1['MGLT'],
-        'number of crew members':starship1['crew'],
-        'passengers':starship1['passengers'],
-        'cargo capacity':starship1['cargo_capacity'],
-        'hyperdrive rating':starship1['hyperdrive_rating'],
+        'name': starship1['name'],
+        'value': starship1['cost_in_credits'],
+        'length': starship1['length'],
+        'max atmosphering speed': starship1['max_atmosphering_speed'],
+        'max sublight speed (MGLT)': starship1['MGLT'],
+        'number of crew members': starship1['crew'],
+        'passengers': starship1['passengers'],
+        'cargo capacity': starship1['cargo_capacity'],
+        'hyperdrive rating': starship1['hyperdrive_rating'],
     }
 
 def random_starship2():
@@ -46,20 +46,27 @@ def random_starship2():
     response = requests.get(url)
     starship2 = response.json()
     return{
-        'name':starship2['name'],
-        'value':starship2['cost_in_credits'],
-        'length':starship2['length'],
-        'max atmosphering speed':starship2['max_atmosphering_speed'],
-        'max sublight speed (MGLT)':starship2['MGLT'],
-        'number of crew members':starship2['crew'],
-        'passengers':starship2['passengers'],
-        'cargo capacity':starship2['cargo_capacity'],
-        'hyperdrive rating':starship2['hyperdrive_rating'],
+        'name': starship2['name'],
+        'value': starship2['cost_in_credits'],
+        'length': starship2['length'],
+        'max atmosphering speed': starship2['max_atmosphering_speed'],
+        'max sublight speed (MGLT)': starship2['MGLT'],
+        'number of crew members': starship2['crew'],
+        'passengers': starship2['passengers'],
+        'cargo capacity': starship2['cargo_capacity'],
+        'hyperdrive rating': starship2['hyperdrive_rating'],
     }
 
-if allocation_choice == 'C' or 'c':
-      chosen_ship = input("You have a choice between Starship 1: '{}' or Starship 2: '{}'".format(starship1['name'], starship2['name']))
 
-elif allocation_choice == 'R' or 'r':
-      print("You have been allocated the following Starship: '{}'".format(starship1['name']))
+def card_choice():
+    if allocation_choice == 'C' or 'c':
+        chosen_card = input("You have a choice between Starship 1: '{}' or Starship 2: '{}'".format(starship1['name'], starship2['name']))
+        print(chosen_card)
+    elif allocation_choice == 'R' or 'r':
+        print("You have been allocated the following Starship: '{}'".format(starship1['name']))
+    else:
+        print("You have entered an invalid response. Please type 'C' to choose or 'R' to be randomly allocated a starship.")
+
+
+card_choice()
 
