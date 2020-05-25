@@ -16,13 +16,13 @@ import random
 """
 
 #find way of telling Python which round it is
-round_count = 1
+round_count = 0
 
-allocation_choice = input('Round {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(round_count))
+allocation_choice = input('Round {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(round_count+1))
 
 import requests
 """
-#correctly prints starship name for choice
+# correctly prints starship name for choice
 if allocation_choice == 'C' or 'c':
       random_card1 = random.randint(1, 36)
       url_1 = 'https://swapi.dev/api/starships/{}/'.format(random_card1)
