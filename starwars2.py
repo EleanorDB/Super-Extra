@@ -14,43 +14,52 @@ import random
       '\nMay the Force be with You.')
 """
 
-#find way of telling Python which round it is
+
 round_count = 0
 
-allocation_choice = input('Round {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(round_count))
+allocation_choice = input('Round {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(round_count+1))
 
 import requests
 
-#correctly prints starship name for choice
+starship_list=[2, 3, 5, 9, 10, 11, 12, 13, 15, 17]
+
+def random_starship1():
+    starship_number1 = random.choice(starship_list)
+    url = 'https://swapi.dev/api/starships/{}/'.format(starship_number1)
+    response = requests.get(url)
+    starship1 = response.json()
+    return{
+        'name':starship1['name'],
+        'value':starship1['cost_in_credits'],
+        'length':starship1['length'],
+        'max atmosphering speed':starship1['max_atmosphering_speed'],
+        'max sublight speed (MGLT)':starship1['MGLT'],
+        'number of crew members':starship1['crew'],
+        'passengers':starship1['passengers'],
+        'cargo capacity':starship1['cargo_capacity'],
+        'hyperdrive rating':starship1['hyperdrive_rating'],
+    }
+
+def random_starship2():
+    starship_number2 = random.choice(starship_list)
+    url = 'https://swapi.dev/api/starships/{}/'.format(starship_number2)
+    response = requests.get(url)
+    starship2 = response.json()
+    return{
+        'name':starship2['name'],
+        'value':starship2['cost_in_credits'],
+        'length':starship2['length'],
+        'max atmosphering speed':starship2['max_atmosphering_speed'],
+        'max sublight speed (MGLT)':starship2['MGLT'],
+        'number of crew members':starship2['crew'],
+        'passengers':starship2['passengers'],
+        'cargo capacity':starship2['cargo_capacity'],
+        'hyperdrive rating':starship2['hyperdrive_rating'],
+    }
+
 if allocation_choice == 'C' or 'c':
-      random_card1 = random.randint(1, 36)
-      url_1 = 'https://swapi.dev/api/starships/{}/'.format(random_card1)
-      response1 = requests.get(url_1)
-      starship1 = response1.json()
+      chosen_ship = input("You have a choice between Starship 1: '{}' or Starship 2: '{}'".format(starship1['name'], starship2['name']))
 
-      random_card2 = random.randint(1, 36)
-      url_2 = 'https://swapi.dev/api/starships/{}/'.format(random_card2)
-      response2 = requests.get(url_2)
-      starship2 = response2.json()
-
-      #can't get to work: presenting the two choices to user
-      #chosen_ship = input("You have a choice between Starship 1: '{}' or Starship 2: '{}'".format(starship1["name"], starship2["name"]))
-
-      #haven't yet tested calling dictionary
-      if chosen_ship == 'Starship 1' or '1':
-            stored_choice = {url_1}
-      elif chosen_ship == 'Starship 2' or '2':
-            stored_choice = {url_2}
-      else:
-            chosen_ship = input("You have entered an invalid choice. Please type 'Starship 1' or 'Starship 2'.")
-            continue
-
-#end of choice section
-
-#if user chooses to be randomly allocated a card
 elif allocation_choice == 'R' or 'r':
-      random_allocated_card = random.randint(1, 36)
-      url_rand = 'https://swapi.dev/api/starships/{}/'.format(random_allocated_card)
-      rand_response = requests.get(url_rand)
-      rand_starship = rand_response.json()
-      print("You have been allocated the following Starship: '{}'".format(rand_starship["name"]))
+      print("You have been allocated the following Starship: '{}'".format(starship1['name']))
+
