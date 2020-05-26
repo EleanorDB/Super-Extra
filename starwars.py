@@ -116,6 +116,20 @@ print("This starship's statistics are: "
       "\nCargo capacity (kg): {}".format(chosen_ship['cost in credits'], chosen_ship['length'], chosen_ship['crew'], chosen_ship['passengers'], chosen_ship['maximum atmosphering speed'], chosen_ship['cargo capacity']))
 
 #user chooses statistic to play
-print("Which statistic will you choose, young Jedi, in your fight against the Empire? ")
+def choice_statistic():
+      chosen_statistic = input("Which statistic will you choose, young Jedi, in your fight against the Empire? Please enter 'Cost', 'Length', 'Crew', 'Passengers', 'Speed' or 'Cargo'. ")
+
+      if chosen_statistic == 'Cost':
+            chosen_statistic = chosen_ship['cost in credits']
+      elif chosen_statistic == 'Length':
+            chosen_statistic = chosen_ship['length']
+      elif chosen_statistic == 'Crew':
+            chosen_statistic = chosen_ship['crew']
+      elif chosen_statistic == 'Passengers':
+            chosen_statistic = chosen_ship['[passengers']
+      elif chosen_statistic == 'Speed':
+            chosen_statistic = chosen_ship['max atmosphering speed']
+      else chosen_statistic == 'Cargo':
+            chosen_statistic = chosen_ship['cargo capacity']
 
 print("The Empire has been allocated {} starship".format(computer_ship['name']))
