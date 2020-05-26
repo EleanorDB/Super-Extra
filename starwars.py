@@ -121,15 +121,41 @@ def choice_statistic():
 
       if chosen_statistic == 'Cost':
             chosen_statistic = chosen_ship['cost in credits']
+            empire_statistic = computer_ship['cost in credits']
+            print("Your statistic scores {}, while the Empire's statistic scores {}".format(chosen_statistic, empire_statistic))
       elif chosen_statistic == 'Length':
             chosen_statistic = chosen_ship['length']
+            empire_statistic = computer_ship['length']
+            print("Your statistic scores {}, while the Empire's statistic scores {}".format(chosen_statistic, empire_statistic))
       elif chosen_statistic == 'Crew':
             chosen_statistic = chosen_ship['crew']
+            empire_statistic = computer_ship['crew']
+            print("Your statistic scores {}, while the Empire's statistic scores {}".format(chosen_statistic, empire_statistic))
       elif chosen_statistic == 'Passengers':
             chosen_statistic = chosen_ship['[passengers']
+            empire_statistic = computer_ship['passengers']
+            print("Your statistic scores {}, while the Empire's statistic scores {}".format(chosen_statistic, empire_statistic))
       elif chosen_statistic == 'Speed':
             chosen_statistic = chosen_ship['max atmosphering speed']
-      else chosen_statistic == 'Cargo':
+            empire_statistic = computer_ship['max atmosphering speed']
+            print("Your statistic scores {}, while the Empire's statistic scores {}".format(chosen_statistic, empire_statistic))
+      elif chosen_statistic == 'Cargo':
             chosen_statistic = chosen_ship['cargo capacity']
+            empire_statistic = computer_ship['cargo capacity']
+            print("Your statistic scores {}, while the Empire's statistic scores {}".format(chosen_statistic, empire_statistic))
+
+choice_statistic()
+
+#deciding who wins
+def battle_cards():
+      if chosen_statistic > empire_statistic:
+            print("You have won your {} victory against the evil Galactic Empire. ".format(round_count))
+
+
 
 print("The Empire has been allocated {} starship".format(computer_ship['name']))
+
+
+
+
+
