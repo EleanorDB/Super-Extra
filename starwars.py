@@ -84,5 +84,14 @@ def run():
 run()
 
 #present starship statistics
-print("You have been allocated the following starship: ")
-print("Name: {}".format(chosen_ship['name']))
+print("You have been allocated the following starship: "
+      "\nName: {} ".format(chosen_ship['name']))
+print("This starship's statistics are: "
+      "\nCost (Galactic Credits): {} "
+      "\nLength (m): {} "
+      "\nCrew needed: {} "
+      "\nPassengers allowed: {} "
+      "\nMaximum Atmosphering Speed: {} "
+      "\nCargo capacity (kg): {}".format(chosen_ship['cost in credits'], chosen_ship['length'], chosen_ship['crew'], chosen_ship['passengers'], chosen_ship['maximum atmosphering speed'], chosen_ship['cargo capacity']))
+
+print("The Empire has been allocated {} starship".format(?))
