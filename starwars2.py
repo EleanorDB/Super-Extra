@@ -1,4 +1,4 @@
-#Ella's second draft Mon 25 May
+#Luisa's draft Mon 26 May
 
 import random
 
@@ -20,6 +20,7 @@ starship_list = [2, 3, 5, 9, 10, 11, 12, 13, 15, 17]
 
 starship_sample = random.sample(starship_list, 3)
 
+# 2 random starships chosen for user & stats returned
 def random_starship1():
     starship_number1 = starship_sample[0]
     url = 'https://swapi.dev/api/starships/{}/'.format(starship_number1)
@@ -54,6 +55,29 @@ def random_starship2():
         'hyperdrive rating':starship2['hyperdrive_rating'],
     }
 
+# 1 random starship chosen for computer
+
+def random_starship3():
+    starship_number3 = starship_sample[2]
+    url = 'https://swapi.dev/api/starships/{}/'.format(starship_number3)
+    response = requests.get(url)
+    starship3 = response.json()
+    return {
+        'name': starship3['name'],
+        'value': starship3['cost_in_credits'],
+        'length': starship3['length'],
+        'max atmosphering speed': starship3['max_atmosphering_speed'],
+        'max sublight speed (MGLT)': starship3['MGLT'],
+        'number of crew members': starship3['crew'],
+        'passengers': starship3['passengers'],
+        'cargo capacity': starship3['cargo_capacity'],
+        'hyperdrive rating': starship3['hyperdrive_rating'],
+    }
+
+computer_ship = random_starship3()
+
+
+#starship allocation
 def run():
     round_count = 0
 
@@ -71,14 +95,90 @@ def run():
                 round_count + 1))
     if allocation_choice == 'C':
         chosen_ship = input("You have a choice between Starship 1: '{}' or Starship 2: '{}'. Please type 1 or 2 to make your choice".format(choice_1['name'], choice_2['name']))
+        if chosen_ship == '1':
+            my_ship = choice_1
+        elif chosen_ship == '2':
+            my_ship = choice_2
+
+        print("You have chosen {}".format(my_ship['name']))
 
     elif allocation_choice == 'c':
-        chosen_ship = input(
-            "You have a choice between Starship 1: '{}' or Starship 2: '{}'".format(choice_1['name'], choice_2['name']))
+        chosen_ship = input("You have a choice between Starship 1: '{}' or Starship 2: '{}'. Please type 1 or 2 to make your choice".format(choice_1['name'], choice_2['name']))
+        if chosen_ship == '1':
+            my_ship = choice_1
+        elif chosen_ship == '2':
+            my_ship = choice_2
+
+        print("You have chosen {}".format(my_ship['name']))
 
     elif allocation_choice == 'R' or 'r':
+        my_ship = choice_1
         print("You have been allocated the following Starship: '{}'".format(choice_1['name']))
+
+    # Present starship statistics
+    print("This starship's statistics are: "
+              "\nCost (Galactic Credits): {} "
+              "\nLength (m): {} "
+              "\nCrew needed: {} "
+              "\nPassengers allowed: {} "
+              "\nMaximum Atmosphering Speed: {} "
+              "\nCargo capacity (kg): {}".format(my_ship['value'], my_ship['length'],
+                                                 my_ship['number of crew members'],
+                                                 my_ship['passengers'],
+                                                 my_ship['max atmosphering speed'],
+                                                 my_ship['cargo capacity']))
+
+    # User chooses statistic to play
+    def choice_statistic():
+        chosen_statistic = input(
+            "Which statistic will you choose, young Jedi, in your fight against the Empire? Please enter 'Cost', 'Length', 'Crew', 'Passengers', 'Speed', or 'Cargo'.")
+
+        print("The Empire has been allocated {} starship".format(computer_ship['name']))
+
+        if chosen_statistic == 'Cost':
+            my_statistic = my_ship['value']
+            empire_statistic = computer_ship['value']
+        elif chosen_statistic == 'Length':
+            my_statistic = my_ship['length']
+            empire_statistic = computer_ship['length']
+        elif chosen_statistic == 'Crew':
+            my_statistic = my_ship['number of crew members']
+            empire_statistic = computer_ship['number of crew members']
+        elif chosen_statistic == 'Passengers':
+            my_statistic = my_ship['passengers']
+            empire_statistic = computer_ship['passengers']
+        elif chosen_statistic == 'Speed':
+            my_statistic = my_ship['max atmosphering speed']
+            empire_statistic = computer_ship['max atmosphering speed']
+        elif chosen_statistic == 'Cargo':
+            my_statistic = my_ship['cargo capacity']
+            empire_statistic = computer_ship['cargo capacity']
+
+
+        print("Your statistic scores {}, while the Empire's statistic scores {}".format(my_statistic, empire_statistic))
+
+        # Deciding who wins and keeping track of score
+        def battle_cards():
+            score = 0
+            if my_statistic > empire_statistic:
+                print("You have won your {} victory against the evil Galactic Empire."
+                      "\nYour score is {}"
+                      "\But the battle must continue for peace to be restored to the galaxy...".format(round_count,
+                                                                                                       score + 1))
+            elif empire_statistic > my_statistic:
+                print("You have been defeated by the Empire."
+                      "\nYour score remains {}"
+                      "\nBut do not lose hope, young jedi. Your time will come to restore peace to the galaxy.".format(
+                    score))
+            else:
+                print("It's a draw! Continue playing to restore peace to the galaxy")
+
+        battle_cards()
+
+    choice_statistic()
 
 
 run()
+
+
 
