@@ -119,6 +119,8 @@ print("This starship's statistics are: "
 def choice_statistic():
       chosen_statistic = input("Which statistic will you choose, young Jedi, in your fight against the Empire? Please enter 'Cost', 'Length', 'Crew', 'Passengers', 'Speed' or 'Cargo'. ")
 
+      print("The Empire has been allocated {} starship".format(computer_ship['name']))
+
       if chosen_statistic == 'Cost':
             chosen_statistic = chosen_ship['cost in credits']
             empire_statistic = computer_ship['cost in credits']
@@ -144,18 +146,26 @@ def choice_statistic():
             empire_statistic = computer_ship['cargo capacity']
             print("Your statistic scores {}, while the Empire's statistic scores {}".format(chosen_statistic, empire_statistic))
 
+
 choice_statistic()
 
 #deciding who wins
 def battle_cards():
+      score = 0
       if chosen_statistic > empire_statistic:
-            print("You have won your {} victory against the evil Galactic Empire. ".format(round_count))
+            print("You have won your {} victory against the evil Galactic Empire. "
+                  "\nYour score is {}. "
+                  "\nBut the battle must continue for peace to be restored to the galaxy...".format(round_count, score + 1))
+      elif empire_statistic > chosen_statistic:
+            print("You have been defeated by the Empire. "
+                  "\nYour score remains {}. "
+                  "\nBut do not lose hope, young Jedi. Your time will come to restore peace to the galaxy. ".format(score))
+
+battle_cards()
 
 
 
-print("The Empire has been allocated {} starship".format(computer_ship['name']))
-
-
+#tally and present scores so far
 
 
 
