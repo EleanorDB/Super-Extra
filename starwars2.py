@@ -18,8 +18,10 @@ import requests
 
 starship_list = [2, 3, 5, 9, 10, 11, 12, 13, 15, 17]
 
+starship_sample = random.sample(starship_list, 3)
+
 def random_starship1():
-    starship_number1 = random.choice(starship_list)
+    starship_number1 = starship_sample[0]
     url = 'https://swapi.dev/api/starships/{}/'.format(starship_number1)
     response = requests.get(url)
     starship1 = response.json()
@@ -36,7 +38,7 @@ def random_starship1():
     }
 
 def random_starship2():
-    starship_number2 = random.choice(starship_list)
+    starship_number2 = starship_sample[1]
     url = 'https://swapi.dev/api/starships/{}/'.format(starship_number2)
     response = requests.get(url)
     starship2 = response.json()
