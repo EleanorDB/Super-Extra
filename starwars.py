@@ -20,6 +20,7 @@ starship_list = [2, 3, 5, 9, 10, 11, 12, 13, 15, 17]
 
 starship_sample = random.sample(starship_list, 3)
 
+#2 random starships chosen for user
 def random_starship1():
     starship_number1 = starship_sample[0]
     url = 'https://swapi.dev/api/starships/{}/'.format(starship_number1)
@@ -53,6 +54,26 @@ def random_starship2():
         'cargo capacity':starship2['cargo_capacity'],
         'hyperdrive rating':starship2['hyperdrive_rating'],
     }
+
+#1 random starship chosen for computer
+def random_starship3():
+    starship_number3 = starship_sample[2]
+    url = 'https://swapi.dev/api/starships/{}/'.format(starship_number3)
+    response = requests.get(url)
+    starship3 = response.json()
+    return{
+        'name':starship3['name'],
+        'value':starship3['cost_in_credits'],
+        'length':starship3['length'],
+        'max atmosphering speed':starship3['max_atmosphering_speed'],
+        'max sublight speed (MGLT)':starship3['MGLT'],
+        'number of crew members':starship3['crew'],
+        'passengers':starship3['passengers'],
+        'cargo capacity':starship3['cargo_capacity'],
+        'hyperdrive rating':starship3['hyperdrive_rating'],
+    }
+
+computer_ship = starship3
 
 #starship allocation
 def run():
@@ -94,4 +115,7 @@ print("This starship's statistics are: "
       "\nMaximum Atmosphering Speed: {} "
       "\nCargo capacity (kg): {}".format(chosen_ship['cost in credits'], chosen_ship['length'], chosen_ship['crew'], chosen_ship['passengers'], chosen_ship['maximum atmosphering speed'], chosen_ship['cargo capacity']))
 
-print("The Empire has been allocated {} starship".format(?))
+#user chooses statistic to play
+print("Which statistic will you choose, young Jedi, in your fight against the Empire? ")
+
+print("The Empire has been allocated {} starship".format(computer_ship['name']))
