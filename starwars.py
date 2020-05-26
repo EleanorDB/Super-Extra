@@ -149,7 +149,7 @@ def choice_statistic():
 
 choice_statistic()
 
-#deciding who wins
+#deciding who wins and keeping track of score
 def battle_cards():
       score = 0
       if chosen_statistic > empire_statistic:
@@ -163,9 +163,7 @@ def battle_cards():
 
 battle_cards()
 
-
-
-#tally and present scores so far
+#ending and exiting game
 
 
 
