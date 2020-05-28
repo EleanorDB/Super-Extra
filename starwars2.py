@@ -6,7 +6,8 @@ print('\nA long time ago in a galaxy far, far away... '
       '\nIn some rounds, you must use the Force to choose the starship’s strongest characteristic, which will be compared to the Galactic Empire’s allocated card.'
       '\nIn other rounds, the Galactic Empire will have the upper hand and will choose the statistic to be compared.'
       '\nThe side with the highest statistic wins.'
-      '\nYour score will be recorded. Only after choosing 10 winning cards will you succeed in defeating the Empire.'
+      '\nYour score will be recorded. You win 2 points for defeating the Empire, 1 point for a draw and 0 points for losing. '
+      '\nOnly after winning 10 points will you succeed in defeating the Empire.'
       '\nMay the Force be with You.')
 
 import requests
@@ -77,7 +78,7 @@ import sys
 
 def run():
     run.counter += 1
-    score = 0
+    score_list = []
     allocation_choice = input(
         '\nRound {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(run.counter))
 
@@ -153,26 +154,37 @@ def run():
 
         # Deciding who wins and keeping track of score
         def battle_cards():
-            if my_statistic > empire_statistic:
+            if my_statistic == 'unknown' or 'n/a':
+                print("\nYou have been defeated by the Empire."
+                      "\nYour score remains {}. "
+                      "\nBut do not lose hope, young Jedi. Your time will come to restore peace to the Galaxy. ".format(len(score_list)))
+            elif empire_statistic == 'unknown' or 'n/a':
+                score_list.append('1')
+                score_list.append('1')
                 print("\nYou have won your {} victory against the evil Galactic Empire."
-                      "\nBut the battle must continue for peace to be restored to the Galaxy...".format(score + 1))
+                      "\nBut the battle must continue for peace to be restored to the Galaxy...".format(len(score_list)))
+            elif my_statistic > empire_statistic:
+                score_list.append('1')
+                score_list.append('1')
+                print("\nYou have won your {} victory against the evil Galactic Empire."
+                      "\nBut the battle must continue for peace to be restored to the Galaxy...".format(len(score_list)))
             elif empire_statistic > my_statistic:
                 print("\nYou have been defeated by the Empire."
                       "\nYour score remains {}. "
-                      "\nBut do not lose hope, young Jedi. Your time will come to restore peace to the Galaxy. ".format(
-                    score))
+                      "\nBut do not lose hope, young Jedi. Your time will come to restore peace to the Galaxy. ".format(len(score_list)))
             else:
+                score_list.append('1')
                 print("\nIt's a draw! Continue playing to restore peace to the Galaxy. "
-                      "\nYour score is now {}.".format(score + 0.5))
+                      "\nYour score is now {}.".format(len(score_list)))
 
             # score tally to see whether user defeated the Empire - after 10 wins
-            if score >= 10:
+            if len(score_list) >= 10:
                 print(
-                    "\nCongratulations, young Jedi. After 10 victories in battle, you have helped the Rebellion to defeat the Galactic Empire. Peace and freedom can now be restored to the Galaxy.")
+                    "\nCongratulations, young Jedi. You have helped the Rebellion to defeat the Galactic Empire. Peace and freedom can now be restored to the Galaxy.")
                 sys.exit('Mission complete.')
 
             # user choice whether to continue with game (and continue score tally to 10 wins) or end it there
-            elif score < 10:
+            elif len(score_list) < 10:
                 continue_choice = input(
                     "\nWould you like to continue in your fight against the Empire? Enter 'Yes' or 'No'. ")
                 if continue_choice == 'Yes':
