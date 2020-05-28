@@ -70,17 +70,16 @@ def random_starship3():
     }
 
 computer_ship = random_starship3()
-round_count = 0
-score = 0
 
 import sys
 
 #starship allocation
 
 def run():
+    run.counter += 1
+    score = 0
     allocation_choice = input(
-        '\nRound {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(
-            round_count + 1))
+        '\nRound {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(run.counter))
 
     choice_1 = random_starship1()
     choice_2 = random_starship2()
@@ -88,7 +87,7 @@ def run():
     while allocation_choice not in ['C', 'c', 'R', 'r']:
         print('\nThis is an invalid choice. Please choose again. ')
         allocation_choice = input(
-            '\nRound {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(round_count + 1))
+            '\nRound {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(run.counter))
     if allocation_choice == 'C':
         chosen_ship = input("\nYou have a choice between Starship 1: '{}' or Starship 2: '{}'. Please type 1 or 2 to make your choice. ".format(choice_1['name'], choice_2['name']))
         if chosen_ship == '1':
@@ -186,6 +185,7 @@ def run():
 
     choice_statistic()
 
+run.counter = 0
 
 run()
 
