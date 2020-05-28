@@ -1,18 +1,16 @@
-#Luisa's draft Mon 26 May
+# Luisa and Ella draft 28th May
 
 import random
 
-#tested opening and works
-"""print('A long time ago in a galaxy far, far away... '
+print('\nA long time ago in a galaxy far, far away... '
       '\nIt is a period of civil war. The Rebellion continue their fight against the evil Galactic Empire.'
       '\nYou, young Jedi, have been chosen to help the Rebellion in the Battle of Star Wars Top Trumps.'
       '\nIn some rounds, you must use the Force to choose the starship’s strongest characteristic, which will be compared to the Galactic Empire’s allocated card.'
       '\nIn other rounds, the Galactic Empire will have the upper hand and will choose the statistic to be compared.'
       '\nThe side with the highest statistic wins.'
-      '\nYour score will be recorded. Only after choosing 10 winning cards will you succeed in defeating the Empire.'
-      '\nIf you wish to flee the battle scene before the war is won, type: ‘I have lost hope.’'
+      '\nYour score will be recorded. You win 2 points for defeating the Empire, 1 point for a draw and 0 points for losing. '
+      '\nOnly after winning 10 points will you succeed in defeating the Empire.'
       '\nMay the Force be with You.')
-"""
 
 import requests
 
@@ -76,47 +74,47 @@ def random_starship3():
 
 computer_ship = random_starship3()
 
+import sys
 
 #starship allocation
-def run():
-    round_count = 0
 
+def run():
+    run.counter += 1
+    score_list = []
     allocation_choice = input(
-        'Round {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(
-            round_count + 1))
+        '\nRound {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(run.counter))
 
     choice_1 = random_starship1()
     choice_2 = random_starship2()
 
     while allocation_choice not in ['C', 'c', 'R', 'r']:
-        print('This is an invalid choice. Please choose again')
+        print('\nThis is an invalid choice. Please choose again. ')
         allocation_choice = input(
-            'Round {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(
-                round_count + 1))
+            '\nRound {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(run.counter))
     if allocation_choice == 'C':
-        chosen_ship = input("You have a choice between Starship 1: '{}' or Starship 2: '{}'. Please type 1 or 2 to make your choice".format(choice_1['name'], choice_2['name']))
+        chosen_ship = input("\nYou have a choice between Starship 1: '{}' or Starship 2: '{}'. Please type 1 or 2 to make your choice. ".format(choice_1['name'], choice_2['name']))
         if chosen_ship == '1':
             my_ship = choice_1
         elif chosen_ship == '2':
             my_ship = choice_2
 
-        print("You have chosen {}".format(my_ship['name']))
+        print("\nYou have chosen '{}'. ".format(my_ship['name']))
 
     elif allocation_choice == 'c':
-        chosen_ship = input("You have a choice between Starship 1: '{}' or Starship 2: '{}'. Please type 1 or 2 to make your choice".format(choice_1['name'], choice_2['name']))
+        chosen_ship = input("\nYou have a choice between Starship 1: '{}' or Starship 2: '{}'. Please type 1 or 2 to make your choice".format(choice_1['name'], choice_2['name']))
         if chosen_ship == '1':
             my_ship = choice_1
         elif chosen_ship == '2':
             my_ship = choice_2
 
-        print("You have chosen {}".format(my_ship['name']))
+        print("\nYou have chosen '{}'".format(my_ship['name']))
 
     elif allocation_choice == 'R' or 'r':
         my_ship = choice_1
-        print("You have been allocated the following Starship: '{}'".format(choice_1['name']))
+        print("\nYou have been allocated the following Starship: '{}'. ".format(choice_1['name']))
 
     # Present starship statistics
-    print("This starship's statistics are: "
+    print("\nThis starship's statistics are: "
               "\nCost (Galactic Credits): {} "
               "\nLength (m): {} "
               "\nCrew needed: {} "
@@ -131,9 +129,9 @@ def run():
     # User chooses statistic to play
     def choice_statistic():
         chosen_statistic = input(
-            "Which statistic will you choose, young Jedi, in your fight against the Empire? Please enter 'Cost', 'Length', 'Crew', 'Passengers', 'Speed', or 'Cargo'.")
+            "\nWhich statistic will you choose, young Jedi, in your fight against the Empire? \nPlease enter 'Cost', 'Length', 'Crew', 'Passengers', 'Speed', or 'Cargo'. ")
 
-        print("The Empire has been allocated {} starship".format(computer_ship['name']))
+        print("\nThe Empire has been allocated the starship: '{}'. ".format(computer_ship['name']))
 
         if chosen_statistic == 'Cost':
             my_statistic = my_ship['value']
@@ -154,31 +152,54 @@ def run():
             my_statistic = my_ship['cargo capacity']
             empire_statistic = computer_ship['cargo capacity']
 
-
-        print("Your statistic scores {}, while the Empire's statistic scores {}".format(my_statistic, empire_statistic))
+        print("\nYour statistic scores {}, while the Empire's statistic scores {}. ".format(my_statistic, empire_statistic))
 
         # Deciding who wins and keeping track of score
         def battle_cards():
-            score = 0
+            print(type(my_statistic))
+
             if my_statistic > empire_statistic:
-                print("You have won your {} victory against the evil Galactic Empire."
-                      "\nYour score is {}"
-                      "\But the battle must continue for peace to be restored to the galaxy...".format(round_count,
-                                                                                                       score + 1))
+                score_list.append('1')
+                score_list.append('1')
+                print("\nYou have won your {} victory against the evil Galactic Empire."
+                      "\nBut the battle must continue for peace to be restored to the Galaxy...".format(len(score_list)))
             elif empire_statistic > my_statistic:
-                print("You have been defeated by the Empire."
-                      "\nYour score remains {}"
-                      "\nBut do not lose hope, young jedi. Your time will come to restore peace to the galaxy.".format(
-                    score))
+                print("\nYou have been defeated by the Empire."
+                      "\nYour score remains {}. "
+                      "\nBut do not lose hope, young Jedi. Your time will come to restore peace to the Galaxy. ".format(len(score_list)))
             else:
-                print("It's a draw! Continue playing to restore peace to the galaxy")
+                score_list.append('1')
+                print("\nIt's a draw! Continue playing to restore peace to the Galaxy. "
+                      "\nYour score is now {}.".format(len(score_list)))
+
+            # score tally to see whether user defeated the Empire - after 10 wins
+            if len(score_list) >= 10:
+                print(
+                    "\nCongratulations, young Jedi. You have helped the Rebellion to defeat the Galactic Empire. Peace and freedom can now be restored to the Galaxy.")
+                sys.exit('Mission complete.')
+
+            # user choice whether to continue with game (and continue score tally to 10 wins) or end it there
+            elif len(score_list) < 10:
+                continue_choice = input(
+                    "\nWould you like to continue in your fight against the Empire? Enter 'Yes' or 'No'. ")
+                if continue_choice == 'Yes':
+                    run()
+                else:
+                    print("\nWe are disappointed in you, young Jedi. You must be resilient to defeat the Empire. ")
+                    sys.exit('Lost hope.')
+
 
         battle_cards()
 
     choice_statistic()
 
+run.counter = 0
 
 run()
+
+
+
+
 
 
 
