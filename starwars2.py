@@ -7,7 +7,6 @@ print('\nA long time ago in a galaxy far, far away... '
       '\nIn other rounds, the Galactic Empire will have the upper hand and will choose the statistic to be compared.'
       '\nThe side with the highest statistic wins.'
       '\nYour score will be recorded. Only after choosing 10 winning cards will you succeed in defeating the Empire.'
-      '\nIf you wish to flee the battle scene before the war is won, type: ‘I have lost hope.’'
       '\nMay the Force be with You.')
 
 import requests
@@ -175,3 +174,19 @@ def run():
 
 
 run()
+
+import sys
+
+#score tally to see whether user defeated the Empire - after 10 wins
+if score >= 10:
+    print("Congratulations, young Jedi. After 10 victories in battle, you have helped the Rebellion to defeat the Galactic Empire. Peace and freedom can now be restored to the Galaxy.")
+    sys.exit('Mission complete.')
+
+#user choice whether to continue with game (and continue score tally to 10 wins) or end it there
+elif score < 10:
+    continue_choice = input("Would you like to continue in your fight against the Empire? Enter 'Yes' or 'No'. ")
+    if continue_choice == 'Yes':
+        run()
+    else:
+        print("We are disappointed in you, young Jedi. You must be resilient to defeat the Empire. ")
+        sys.exit('Lost hope.')
