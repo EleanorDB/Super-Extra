@@ -1,4 +1,4 @@
-# Luisa draft 30th May
+# Luisa and Ella draft 28th May
 
 import random
 import requests
