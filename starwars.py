@@ -144,54 +144,31 @@ def run():
 
         # Deciding who wins and keeping track of score
         def battle_cards():
-            #see if can turn stats from strings into integers
             try:
-                float(my_statistic)
-                float(empire_statistic)
+                int(my_statistic)
+                int(empire_statistic)
                 print('Worked')
 
             # if statistic value not an integer
             except ValueError:
                 print('Value Error')
-                if my_statistic == 'unknown':
-                    print("\nYou have been defeated by the Empire."
-                          "\nYour score remains {}. "
-                          "\nBut do not lose hope, young Jedi. Your time will come to restore peace to the Galaxy. ".format(len(score_list)))
-                elif my_statistic == 'n/a':
-                    print("\nYou have been defeated by the Empire."
-                          "\nYour score remains {}. "
-                          "\nBut do not lose hope, young Jedi. Your time will come to restore peace to the Galaxy. ".format(len(score_list)))
-                elif empire_statistic == 'unknown':
-                    score_list.append('1')
-                    score_list.append('1')
-                    print("\nYou have won this battle against the evil Galactic Empire. Your score is now {}. "
-                          "\nYou must score {} more points to fully defeat the Empire. "
-                          "\nThe battle must continue for peace to be restored to the Galaxy...".format(len(score_list), 10-score_list))
-                elif empire_statistic == 'n/a':
-                    score_list.append('1')
-                    score_list.append('1')
-                    print("\nYou have won this battle against the evil Galactic Empire. Your score is now {}. "
-                          "\nYou must score {} more points to fully defeat the Empire. "
-                          "\nThe battle must continue for peace to be restored to the Galaxy...".format(len(score_list), 10-score_list))
 
             else:
                 print('Comparing')
-                if float(my_statistic) > float(empire_statistic):
-                    print('I won')
+                if my_statistic > empire_statistic:
                     score_list.append('1')
                     score_list.append('1')
                     print("\nYou have won this battle against the evil Galactic Empire. Your score is now {}. "
                           "\nYou must score {} more points to fully defeat the Empire. "
-                          "\nThe battle must continue for peace to be restored to the Galaxy...".format(len(score_list), 10-score_list))
-                elif float(empire_statistic) > float(my_statistic):
+                          "\nThe battle must continue for peace to be restored to the Galaxy...".format(len(score_list), 10 - score_list))
+                elif empire_statistic > my_statistic:
                     print("\nYou have been defeated by the Empire."
                           "\nYour score remains {}. "
                           "\nBut do not lose hope, young Jedi. Your time will come to restore peace to the Galaxy. ".format(len(score_list)))
-                elif float(my_statistic) == float(empire_statistic):
+                elif my_statistic == empire_statistic:
                     score_list.append('1')
                     print("\nIt's a draw! Continue playing to restore peace to the Galaxy. "
                           "\nYour score is now {}.".format(len(score_list)))
-
             # score tally to see whether user defeated the Empire - after 10 wins
             finally:
                 print('score count')
@@ -199,7 +176,6 @@ def run():
                     print("\nCongratulations, young Jedi. You have helped the Rebellion to defeat the Galactic Empire. Peace and freedom can now be restored to the Galaxy.")
                     score_list.clear()
                     sys.exit('Mission complete.')
-
                 # user choice whether to continue with game (and continue score tally to 10 wins) or end it there
                 elif len(score_list) < 10:
                     continue_choice = input("\nWould you like to continue in your fight against the Empire? Enter 'Yes' or 'No'. ")
@@ -209,10 +185,7 @@ def run():
                         score_list.clear()
                         print("\nWe are disappointed in you, young Jedi. You must be resilient to defeat the Empire. ")
                         sys.exit('Lost hope.')
-
-
         battle_cards()
-
     choice_statistic()
 
 run.counter = 0
