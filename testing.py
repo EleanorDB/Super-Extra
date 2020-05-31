@@ -77,7 +77,6 @@ import sys
 #starship allocation
 def run():
     run.counter += 1
-    score_list = []
     allocation_choice = input(
         '\nRound {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(run.counter))
     choice_1 = random_starship1()
@@ -174,37 +173,37 @@ def run():
 
             print("\nYour statistic scores {}, while the Empire's statistic scores {}. ".format(my_stat_int, emp_stat_int))
 
+            score_list = int(0)
+
             if my_stat_int > emp_stat_int:
-                score_list.append('1')
-                score_list.append('1')
-                points_to_win = 10 - len(score_list)
+                score_list += 2
+                points_to_win = 10 - score_list
                 print("\nYou have won this battle against the evil Galactic Empire. Your score is now {}. "
                       "\nYou must score {} more points to fully defeat the Empire. "
-                      "\nThe battle must continue for peace to be restored to the Galaxy...".format(len(score_list),
-                                                                                                    points_to_win))
+                      "\nThe battle must continue for peace to be restored to the Galaxy...".format(score_list, points_to_win))
             elif emp_stat_int > my_stat_int:
                 print("\nYou have been defeated by the Empire."
                       "\nYour score remains {}. "
-                      "\nBut do not lose hope, young Jedi. Your time will come to restore peace to the Galaxy. ".format(len(score_list)))
+                      "\nBut do not lose hope, young Jedi. Your time will come to restore peace to the Galaxy. ".format(score_list))
 
             elif my_stat_int == emp_stat_int:
-                score_list.append('1')
+                score_list += 1
                 print("\nIt's a draw! Continue playing to restore peace to the Galaxy. "
-                      "\nYour score is now {}.".format(len(score_list)))
+                      "\nYour score is now {}.".format(score_list))
 
             # score tally to see whether user defeated the Empire - after 10 wins
 
-            if len(score_list) >= 10:
+            if score_list >= 10:
                 print("\nCongratulations, young Jedi. You have helped the Rebellion to defeat the Galactic Empire. Peace and freedom can now be restored to the Galaxy.")
-                score_list.clear()
+                score_list = int(0)
                 sys.exit('Mission complete.')
             # user choice whether to continue with game (and continue score tally to 10 wins) or end it there
-            elif len(score_list) < 10:
+            elif score_list < 10:
                 continue_choice = input("\nWould you like to continue in your fight against the Empire? Enter 'Yes' or 'No'. ")
                 if continue_choice == 'Yes':
                     run()
                 else:
-                    score_list.clear()
+                    score_list = int(0)
                     print("\nWe are disappointed in you, young Jedi. You must be resilient to defeat the Empire. ")
                     sys.exit('Lost hope.')
         battle_cards()
