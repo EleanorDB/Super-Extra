@@ -5,15 +5,15 @@ import requests
 import sys
 from termcolor import colored
 
-print(colored("\nA long time ago in a galaxy far, far away... "
-      "\nIt is a period of civil war. The Rebellion continue their fight against the evil Galactic Empire."
+print(colored("\nA long time ago in a galaxy far, far away... ", 'yellow', attrs=['bold', 'underline']),
+      colored("\nIt is a period of civil war. The Rebellion continue their fight against the evil Galactic Empire."
       "\nYou, young Jedi, have been chosen to help the Rebellion in the Battle of Star Wars Top Trumps."
       "\n"
       "\nYou must use the Force to choose a Starship with strong credentials which can defeat that chosen by the Empire. "
       "\nThe Starships’ characteristics will be compared and the strongest Starship wins the battle." 
       "\n"
-      "\nYou gain 2 points for defeating the Empire, 1 point for a draw and 0 points for losing. "
-      "\nOnly after winning 7 points will you succeed in defeating the Empire and restoring peace to the Galaxy."
+      "\nYou gain", 'yellow'), colored("2 points for defeating the Empire, 1 point for a draw and 0 points for losing. ", 'red'),
+      colored("\nOnly after winning", 'yellow'), colored("7 points", 'red'), colored("will you succeed in defeating the Empire and restoring peace to the Galaxy."
       "\nMay the Force be with You.", 'yellow'))
 
 # 2 random starships chosen for user & stats returned
@@ -72,8 +72,8 @@ def random_starship3(starship_to_be_inserted):
 #starship allocation
 def run(total_score):
     run.counter += 1
-    print(colored('\n Round {}: Would you like to choose your card or be allocated a random one?'.format(run.counter), 'blue'))
-    allocation_choice = input(colored(' Type C to choose or R for random. ', 'magenta'))
+    print(colored('\nRound {}: Would you like to choose your card or be allocated a random one?'.format(run.counter), 'blue'))
+    allocation_choice = input(colored('Type C to choose or R for random. ', 'magenta'))
 
     starship_list = [2, 3, 5, 9, 10, 11, 12, 13, 15, 17]
 
@@ -181,14 +181,14 @@ def run(total_score):
                         "\nCongratulations, young Jedi. You have helped the Rebellion to defeat the Galactic Empire. Peace and freedom can now be restored to the Galaxy.", 'magenta'))
                     sys.exit('Mission complete.')
                 points_to_win = 7 - total_score
-                print(colored("\nYou have won this battle against the evil Galactic Empire. Your score is now {}. "
-                      "\nYou must score {} more points to fully defeat the Empire. "
-                      "\nThe battle must continue for peace to be restored to the Galaxy...".format(total_score, points_to_win), 'green'))
+                print(colored("\nYou have won this battle against the evil Galactic Empire.", 'green'), colored("Your score is now {}. ".format(total_score), 'magenta'),
+                      colored("\nYou must score {} more points to fully defeat the Empire. ".format(points_to_win), 'magenta'),
+                      colored("\nThe battle must continue for peace to be restored to the Galaxy...", 'green'))
 
             elif emp_stat_int > my_stat_int:
-                print(colored("\nYou have been defeated by the Empire."
-                      "\nYour score remains {}. "
-                      "\nBut do not lose hope, young Jedi. Your time will come to restore peace to the Galaxy. ".format(total_score), 'red'))
+                print(colored("\nYou have been defeated by the Empire.", 'red'),
+                      colored("\nYour score remains {}. ".format(total_score), 'magenta'),
+                      colored("\nBut do not lose hope, young Jedi. Your time will come to restore peace to the Galaxy. ", 'red'))
 
             elif my_stat_int == emp_stat_int:
                 total_score += 1
@@ -196,11 +196,11 @@ def run(total_score):
                     print(colored(
                         "\nCongratulations, young Jedi. You have helped the Rebellion to defeat the Galactic Empire. Peace and freedom can now be restored to the Galaxy.", 'magenta'))
                     sys.exit('Mission complete.')
-                print(colored("\nIt's a draw! Continue playing to restore peace to the Galaxy. "
-                      "\nYour score is now {}.".format(total_score), 'yellow'))
+                print(colored("\nIt's a draw! Continue playing to restore peace to the Galaxy. ", 'yellow'),
+                      colored("\nYour score is now {}.".format(total_score), 'magenta'))
 
             while(True):
-                print(colored("Would you like to continue in your fight against the Empire?", 'blue'))
+                print(colored("\nWould you like to continue in your fight against the Empire?", 'blue'))
                 continue_choice = input(colored("Enter 'Yes' or 'No'. ", 'magenta'))
                 if continue_choice in ['Yes', 'Y', 'y', 'Ye']:
                     run(total_score)
