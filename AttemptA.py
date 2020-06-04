@@ -1,6 +1,3 @@
-# Ella 31st May - Pat
-
-
 import random
 print("\nA long time ago in a galaxy far, far away... "
       "\nIt is a period of civil war. The Rebellion continue their fight against the evil Galactic Empire."
@@ -201,19 +198,16 @@ def run(total_score):
 
         def whether_continue(total_score):
             continue_choice = input("\nWould you like to continue in your fight against the Empire? Enter 'Yes' or 'No'. ")
-            if continue_choice == 'Yes':
+            if continue_choice in ['Yes', 'Y', 'y', 'Ye']:
                 run(total_score)
             else:
                 print("\nWe are disappointed in you, young Jedi. You must be resilient to defeat the Empire. ")
                 sys.exit('Lost hope.')
 
-
-        battle_cards(0)
-        whether_continue(0)
-    choice_statistic(0)
+        whether_continue(total_score)
+        battle_cards(total_score)
+    choice_statistic(total_score)
 
 run.counter = 0
 
-total_score = 0
 run(0)
-

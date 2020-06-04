@@ -1,5 +1,4 @@
-# Ella 31st May - Pat
-
+#VERSION WHERE SCORE FINALLY WORKS!!!!!!
 
 import random
 print("\nA long time ago in a galaxy far, far away... "
@@ -112,7 +111,6 @@ def run(total_score):
                                                  my_ship['passengers'],
                                                  my_ship['max atmosphering speed'],
                                                  my_ship['cargo capacity']))
-    return total_score
 
     # User chooses statistic to play
     def choice_statistic(total_score):
@@ -140,8 +138,6 @@ def run(total_score):
             choice_statistic()
 
         print("\nThe Empire has been allocated the starship: '{}'. ".format(computer_ship['name']))
-
-        return total_score
 
     # Deciding who wins and keeping track of score
         def battle_cards(total_score):
@@ -196,24 +192,20 @@ def run(total_score):
                 print("\nCongratulations, young Jedi. You have helped the Rebellion to defeat the Galactic Empire. Peace and freedom can now be restored to the Galaxy.")
                 sys.exit('Mission complete.')
 
-            while total_score < 10:
-                return total_score
-
-        def whether_continue(total_score):
-            continue_choice = input("\nWould you like to continue in your fight against the Empire? Enter 'Yes' or 'No'. ")
-            if continue_choice == 'Yes':
-                run(total_score)
             else:
-                print("\nWe are disappointed in you, young Jedi. You must be resilient to defeat the Empire. ")
-                sys.exit('Lost hope.')
+                while(True):
+                    continue_choice = input("\nWould you like to continue in your fight against the Empire? Enter 'Yes' or 'No'. ")
+                    if continue_choice in ['Yes', 'Y', 'y', 'Ye']:
+                        run(total_score)
+                        break
+                    else:
+                        print("\nWe are disappointed in you, young Jedi. You must be resilient to defeat the Empire. ")
+                        sys.exit('Lost hope.')
 
-
-        battle_cards(0)
-        whether_continue(0)
-    choice_statistic(0)
+        battle_cards(total_score)
+    choice_statistic(total_score)
 
 run.counter = 0
 
 total_score = 0
 run(0)
-
