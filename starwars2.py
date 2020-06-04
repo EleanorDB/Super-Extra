@@ -1,4 +1,4 @@
-#VERSION WHERE SCORE FINALLY WORKS!!!!!!
+#FINAL VERSION
 
 import random
 import requests
