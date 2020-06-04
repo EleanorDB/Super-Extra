@@ -1,6 +1,9 @@
 #VERSION WHERE SCORE FINALLY WORKS!!!!!!
 
 import random
+import requests
+import sys
+
 print("\nA long time ago in a galaxy far, far away... "
       "\nIt is a period of civil war. The Rebellion continue their fight against the evil Galactic Empire."
       "\nYou, young Jedi, have been chosen to help the Rebellion in the Battle of Star Wars Top Trumps."
@@ -9,51 +12,47 @@ print("\nA long time ago in a galaxy far, far away... "
       "\nThe Starships’ characteristics will be compared and the strongest Starship wins the battle." 
       "\n"
       "\nYou gain 2 points for defeating the Empire, 1 point for a draw and 0 points for losing. "
-      "\nOnly after winning 10 points will you succeed in defeating the Empire and restoring peace to the Galaxy."
+      "\nOnly after winning 7 points will you succeed in defeating the Empire and restoring peace to the Galaxy."
       "\nMay the Force be with You.")
 
-import requests
-starship_list = [2, 3, 5, 9, 10, 11, 12, 13, 15, 17]
-starship_sample = random.sample(starship_list, 3)
-
 # 2 random starships chosen for user & stats returned
-def random_starship1():
-    starship_number1 = starship_sample[0]
+def random_starship1(starship_to_be_inserted):
+    starship_number1 = starship_to_be_inserted[0]
     url = 'https://swapi.dev/api/starships/{}/'.format(starship_number1)
     response = requests.get(url)
     starship1 = response.json()
     return{
-        'name':starship1['name'],
-        'value':starship1['cost_in_credits'],
-        'length':starship1['length'],
-        'max atmosphering speed':starship1['max_atmosphering_speed'],
-        'max sublight speed (MGLT)':starship1['MGLT'],
-        'number of crew members':starship1['crew'],
-        'passengers':starship1['passengers'],
-        'cargo capacity':starship1['cargo_capacity'],
-        'hyperdrive rating':starship1['hyperdrive_rating'],
+        'name': starship1['name'],
+        'value': starship1['cost_in_credits'],
+        'length': starship1['length'],
+        'max atmosphering speed': starship1['max_atmosphering_speed'],
+        'max sublight speed (MGLT)': starship1['MGLT'],
+        'number of crew members': starship1['crew'],
+        'passengers': starship1['passengers'],
+        'cargo capacity': starship1['cargo_capacity'],
+        'hyperdrive rating': starship1['hyperdrive_rating'],
     }
 
-def random_starship2():
-    starship_number2 = starship_sample[1]
+def random_starship2(starship_to_be_inserted):
+    starship_number2 = starship_to_be_inserted[1]
     url = 'https://swapi.dev/api/starships/{}/'.format(starship_number2)
     response = requests.get(url)
     starship2 = response.json()
     return{
-        'name':starship2['name'],
-        'value':starship2['cost_in_credits'],
-        'length':starship2['length'],
-        'max atmosphering speed':starship2['max_atmosphering_speed'],
-        'max sublight speed (MGLT)':starship2['MGLT'],
-        'number of crew members':starship2['crew'],
-        'passengers':starship2['passengers'],
-        'cargo capacity':starship2['cargo_capacity'],
-        'hyperdrive rating':starship2['hyperdrive_rating'],
+        'name': starship2['name'],
+        'value': starship2['cost_in_credits'],
+        'length': starship2['length'],
+        'max atmosphering speed': starship2['max_atmosphering_speed'],
+        'max sublight speed (MGLT)': starship2['MGLT'],
+        'number of crew members': starship2['crew'],
+        'passengers': starship2['passengers'],
+        'cargo capacity': starship2['cargo_capacity'],
+        'hyperdrive rating': starship2['hyperdrive_rating'],
     }
 
 # 1 random starship chosen for computer
-def random_starship3():
-    starship_number3 = starship_sample[2]
+def random_starship3(starship_to_be_inserted):
+    starship_number3 = starship_to_be_inserted[2]
     url = 'https://swapi.dev/api/starships/{}/'.format(starship_number3)
     response = requests.get(url)
     starship3 = response.json()
@@ -69,36 +68,34 @@ def random_starship3():
         'hyperdrive rating': starship3['hyperdrive_rating'],
     }
 
-computer_ship = random_starship3()
-
-import sys
-
 #starship allocation
 def run(total_score):
     run.counter += 1
     allocation_choice = input('\nRound {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(run.counter))
-    choice_1 = random_starship1()
-    choice_2 = random_starship2()
+
+    starship_list = [2, 3, 5, 9, 10, 11, 12, 13, 15, 17]
+
+    starship_sample = random.sample(starship_list, 3)
+
+    choice_1 = random_starship1(starship_sample)
+    choice_2 = random_starship2(starship_sample)
+    computer_ship = random_starship3(starship_sample)
+
     while allocation_choice not in ['C', 'c', 'R', 'r']:
         print('\nThis is an invalid choice. Please choose again. ')
         allocation_choice = input('\nRound {}: Would you like to choose your card or be allocated a random one? Type C to choose or R for random. '.format(run.counter))
-    if allocation_choice == 'C':
+
+    if allocation_choice in ['C', 'c']:
         chosen_ship = input("\nYou have a choice between Starship 1: '{}' or Starship 2: '{}'. Please type 1 or 2 to make your choice. ".format(choice_1['name'], choice_2['name']))
         if chosen_ship == '1':
             my_ship = choice_1
         elif chosen_ship == '2':
             my_ship = choice_2
         print("\nYou have chosen '{}'. ".format(my_ship['name']))
-    elif allocation_choice == 'c':
-        chosen_ship = input("\nYou have a choice between Starship 1: '{}' or Starship 2: '{}'. Please type 1 or 2 to make your choice".format(choice_1['name'], choice_2['name']))
-        if chosen_ship == '1':
-            my_ship = choice_1
-        elif chosen_ship == '2':
-            my_ship = choice_2
-        print("\nYou have chosen '{}'".format(my_ship['name']))
-    elif allocation_choice == 'R' or 'r':
+    elif allocation_choice in ['R' or 'r']:
         my_ship = choice_1
         print("\nYou have been allocated the following Starship: '{}'. ".format(choice_1['name']))
+
     # Present starship statistics
     print("\nThis starship's statistics are: "
               "\nCost (Galactic Credits): {} "
@@ -174,10 +171,15 @@ def run(total_score):
 
             if my_stat_int > emp_stat_int:
                 total_score += 2
-                points_to_win = 10 - total_score
+                if total_score >= 7:
+                    print(
+                        "\nCongratulations, young Jedi. You have helped the Rebellion to defeat the Galactic Empire. Peace and freedom can now be restored to the Galaxy.")
+                    sys.exit('Mission complete.')
+                points_to_win = 7 - total_score
                 print("\nYou have won this battle against the evil Galactic Empire. Your score is now {}. "
                       "\nYou must score {} more points to fully defeat the Empire. "
                       "\nThe battle must continue for peace to be restored to the Galaxy...".format(total_score, points_to_win))
+
             elif emp_stat_int > my_stat_int:
                 print("\nYou have been defeated by the Empire."
                       "\nYour score remains {}. "
@@ -185,22 +187,21 @@ def run(total_score):
 
             elif my_stat_int == emp_stat_int:
                 total_score += 1
+                if total_score >= 7:
+                    print(
+                        "\nCongratulations, young Jedi. You have helped the Rebellion to defeat the Galactic Empire. Peace and freedom can now be restored to the Galaxy.")
+                    sys.exit('Mission complete.')
                 print("\nIt's a draw! Continue playing to restore peace to the Galaxy. "
                       "\nYour score is now {}.".format(total_score))
 
-            if total_score >= 10:
-                print("\nCongratulations, young Jedi. You have helped the Rebellion to defeat the Galactic Empire. Peace and freedom can now be restored to the Galaxy.")
-                sys.exit('Mission complete.')
-
-            else:
-                while(True):
-                    continue_choice = input("\nWould you like to continue in your fight against the Empire? Enter 'Yes' or 'No'. ")
-                    if continue_choice in ['Yes', 'Y', 'y', 'Ye']:
-                        run(total_score)
-                        break
-                    else:
-                        print("\nWe are disappointed in you, young Jedi. You must be resilient to defeat the Empire. ")
-                        sys.exit('Lost hope.')
+            while(True):
+                continue_choice = input("\nWould you like to continue in your fight against the Empire? Enter 'Yes' or 'No'. ")
+                if continue_choice in ['Yes', 'Y', 'y', 'Ye']:
+                    run(total_score)
+                    break
+                else:
+                    print("\nWe are disappointed in you, young Jedi. You must be resilient to defeat the Empire. ")
+                    sys.exit('Lost hope.')
 
         battle_cards(total_score)
     choice_statistic(total_score)
